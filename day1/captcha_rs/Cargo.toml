@@ -1,0 +1,6 @@
+[package]
+name = "captcha_rs"
+version = "0.1.0"
+authors = ["Charlie Wang <charliewanggib@gmail.com>"]
+
+[dependencies]
