@@ -1,4 +1,4 @@
-local i = 1;
+local i = 1
 local jumps = {}
 
 for line in io.lines() do
@@ -12,8 +12,8 @@ if day2 then print("Running day 2 solution") end
 
 local len = #jumps
 
-local cur = 1;
-local steps = 0;
+local cur = 1
+local steps = 0
 
 while cur >= 1 and cur <= len do
     offset = jumps[cur]
