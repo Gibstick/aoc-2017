@@ -3,8 +3,8 @@
 #include <inttypes.h>
 #include <assert.h>
 
-#define ARR_SIZE (UINT8_MAX + 1)
-#define ROUNDS 64
+const uint16_t ARR_SIZE = UINT8_MAX + 1;
+const int ROUNDS = 64;
 
 // reverse the order of len elements in the circular array
 // starting at the current position
