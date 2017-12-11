@@ -5,35 +5,30 @@
 
 ;; read one character and do everything
 (define (parse-group
-         [group-count 0] ;; no need for stack since only groups can nest
          [group-score 0] ;; score of the group that immediately contains it
          [total-score 0]
          [garbage-count 0])
   (define sym (let ([c (read-bytes 1)]) (if (eof-object? c) #f c)))
   (case sym
     [(#"{") (parse-group
-             (add1 group-count)
              (add1 group-score)
              total-score
              garbage-count)]
     [(#"}") (parse-group
-             (sub1 group-count)
              (sub1 group-score)
              (+ group-score total-score)
              garbage-count)]
     [(#"<") (parse-group
-             group-count
              group-score
              total-score
              (+ garbage-count (discard-garbage)))]
     [(#"," #"\n") (parse-group
-                   group-count
                    group-score
                    total-score
                    garbage-count)]
     [(#f) (list total-score garbage-count)]
     [else
-     (eprintf "(~a, ~a, ~a, ~a)" sym group-count group-score total-score)
+     (eprintf "(~a, ~a, ~a)" sym group-score total-score)
      (error "This shouldn't get here")]))
 
 ;; discard all garbage and return the count of non-cancelled garbage
