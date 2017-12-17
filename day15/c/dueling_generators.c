@@ -26,7 +26,7 @@ generator_a(void) {
     static uint64_t state = INIT_A;
     do { state = (16807 * state) % INT_MAX; }
 #ifdef PART2
-    while (state % 4 != 0);
+    while ((state & 3) != 0);
 #else
     while (0);
 #endif
@@ -38,7 +38,7 @@ generator_b(void) {
     static uint64_t state = INIT_B;
     do { state = (48271 * state) % INT_MAX; }
 #ifdef PART2
-    while (state % 8 != 0);
+    while ((state & 7) != 0);
 #else
     while (0);
 #endif
