@@ -4,9 +4,17 @@
 #include <limits.h>
 #include <assert.h>
 
+#ifndef INIT_A
+#define INIT_A 65
+#endif
+
+#ifndef INIT_B
+#define INIT_B 8921
+#endif
+
 const uint64_t num_pairs =
 #ifdef PART2
-    5; // 5 million
+    5000000; // 5 million
 #else
     40000000; // 40 million
 #endif
@@ -15,14 +23,26 @@ const uint32_t LOW_MASK = 0x0000FFFF;
 
 static inline uint32_t
 generator_a(void) {
-    static uint64_t state = 65;
-    return state = (16807 * state) % INT_MAX;
+    static uint64_t state = INIT_A;
+    do { state = (16807 * state) % INT_MAX; }
+#ifdef PART2
+    while (state % 4 != 0);
+#else
+    while (0);
+#endif
+    return state;
 }
 
 static inline uint32_t
 generator_b(void) {
-    static uint64_t state = 8921;
-    return state = (48271 * state) % INT_MAX;
+    static uint64_t state = INIT_B;
+    do { state = (48271 * state) % INT_MAX; }
+#ifdef PART2
+    while (state % 8 != 0);
+#else
+    while (0);
+#endif
+    return state;
 }
 
 int main(void) {
